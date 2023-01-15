@@ -1,14 +1,13 @@
-import { FaSearch, FaTimes } from "react-icons/fa"
 import { useState, useEffect } from "react"
 import Head from "next/head"
-import Aos from "aos"
-import "aos/dist/aos.css"
+import TypewriterComponent from 'typewriter-effect'
 
+import SearchBar from "./search_bar"
+import PeopleList from "./people_list"
 import styles from '../styles/Home.module.css'
 
 export default function Home() {
     useEffect(() => {
-        Aos.init({ duration: 1000 });
         loadPeople();
     }, []);
 
@@ -32,6 +31,9 @@ export default function Home() {
         }
     };
 
+    const setSearch = (searchData) => setSearchTerm(searchData)
+    const setFeatured = (featuredData) => setFeaturedPerson(featuredData)
+
     const FeaturedTile = () => {
         return (
             <div>
@@ -48,39 +50,15 @@ export default function Home() {
                 <title>Game of Thrones Characters</title>
             </Head>
             <div className={styles.container}>
-                <div data-aos="fade" className={styles.container}>
-                    <h1>Game of Thrones Characters</h1>
-                    <p>Search for a character from the Game of Thrones series and learn about them!</p>
-                </div>
-                <div data-aos="fade" className={styles.search}>
-                    <FaSearch />
-                    <input 
-                        type="text"
-                        id="searchBar"
-                        className={styles.searchBar}
-                        placeholder="Search by character name"
-                        value={searchTerm}
-                        onInput={e => setSearchTerm(() => e.target.value)}
-                    />
-                    <FaTimes onClick={() => setSearchTerm("")}/>
-                </div>
-                <div data-aos="fade" data-aos-delay="150" className={styles.peopleList}>
-                    {people.filter(person => {
-                        if (searchTerm === "") {
-                            return person; 
-                        } else if (person.fullName.toLowerCase().includes(searchTerm.toLowerCase())) {
-                            return person;
-                        }
-                    }).map(person => {
-                        return (
-                            <div onClick={() => setFeaturedPerson(person)}>
-                                <img src={person.imageUrl} alt={person.fullName}/>
-                            </div>
-                        )
-                    })}
-                </div>
+                <h1>
+                    <TypewriterComponent onInit={(typewriter) => typewriter.typeString("Game of Thrones Characters").start()} />
+                </h1>
+                <p>Search for a character from the Game of Thrones series and learn about them!</p>
+
+                <SearchBar setSearch = {setSearch} searchTerm = {searchTerm} />
+                <PeopleList setFeatured = {setFeatured} people = {people} searchTerm = {searchTerm} />
             </div>
-            <div data-aos="fade" data-aos-delay="300" className={styles.description}>
+            <div className={styles.description}>
                 <FeaturedTile />
             </div>
         </div>

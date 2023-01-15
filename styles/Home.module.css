@@ -40,28 +40,19 @@
   padding-right: 5em;
 }
 
-.peopleList > div {
-  height: inherit;
-  width: 15rem;
+.peopleList > img {
+  max-height: 100%;
+  width: 100%;
+  object-fit: contain;
+  margin: auto;
   overflow: hidden;
-  justify-content: center;
-  align-items: center;
-  background-color: antiquewhite;
   border: 3px solid black;
   border-radius: 1em;
   transition: all .25s ease;
 }
 
-.peopleList > div:hover {
-  box-shadow: 0 0 10px 10px rgba(161, 99, 115, 0.7);
-}
-
-.peopleList > div > img {
-  height: 100%;
-  width: 100%;
-  object-fit: contain;
-  margin: auto;
-  overflow: hidden;
+.peopleList > img:hover {
+  transform: scale(103%);
 }
 
 .description {
