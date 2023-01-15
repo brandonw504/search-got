@@ -1,6 +1,8 @@
 import styles from '../styles/Home.module.css'
 
 export default function PeopleList({setFeatured, people, searchTerm}) {
+    if (!people) people = []
+
     return (
         <div className={styles.peopleList}>
             {people.filter(person => {
