@@ -7,6 +7,16 @@ import PeopleList from "./people_list"
 import styles from '../styles/Home.module.css'
 
 export default function Home() {
+    const loadPeople = async () => {
+        try {
+            const res = await fetch('https://thronesapi.com/api/v2/Characters');
+            gotPeople = await res.json();
+            setPeople(gotPeople)
+        } catch(err) {
+            console.error(err);
+        }
+    };
+    
     useEffect(() => {
         loadPeople();
     }, []);
@@ -20,16 +30,6 @@ export default function Home() {
     const [people, setPeople] = useState([])
     const [featuredPerson, setFeaturedPerson] = useState(placeholder)
     const [searchTerm, setSearchTerm] = useState("")
-
-    const loadPeople = async () => {
-        try {
-            const res = await fetch('https://thronesapi.com/api/v2/Characters');
-            gotPeople = await res.json();
-            setPeople(gotPeople)
-        } catch(err) {
-            console.error(err);
-        }
-    };
 
     const setSearch = (searchData) => setSearchTerm(searchData)
     const setFeatured = (featuredData) => setFeaturedPerson(featuredData)

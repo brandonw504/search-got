@@ -9,9 +9,9 @@ export default function PeopleList({setFeatured, people, searchTerm}) {
                 } else if (person.fullName.toLowerCase().includes(searchTerm.toLowerCase())) {
                     return person;
                 }
-            }).map(person => {
+            }).map((person, i) => {
                 return (
-                    <img src={person.imageUrl} alt={person.fullName} onClick={() => setFeatured(person)}/>
+                    <img key={i} src={person.imageUrl} alt={person.fullName} onClick={() => setFeatured(person)}/>
                 )
             })}
         </div>
